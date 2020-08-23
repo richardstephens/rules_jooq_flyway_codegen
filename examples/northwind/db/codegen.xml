@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<configuration xmlns="http://www.jooq.org/xsd/jooq-codegen-3.3.0.xsd">
+    <!-- Configure the database connection here -->
+    <generator>
+        <database>
+            <name>org.jooq.meta.mysql.MySQLDatabase</name>
+            <includes>.*</includes>
+            <excludes></excludes>
+        </database>
+
+        <generate>
+        </generate>
+
+        <target>
+            <!-- The destination package of your generated classes (within the
+                 destination directory)
+
+                 jOOQ may append the schema name to this package if generating multiple schemas,
+                 e.g. org.jooq.your.packagename.schema1
+                      org.jooq.your.packagename.schema2 -->
+            <packageName>dev.richst.jooq_bazel_example.northwind.db</packageName>
+
+            <!-- The destination directory of your generated classes -->
+            <directory>[this/directory/is/overridden/by/the/rule]</directory>
+        </target>
+    </generator>
+</configuration>
