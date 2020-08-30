@@ -13,18 +13,18 @@ To import the rules:
 
     load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
     http_archive(
-        name = "bazel_jooq_flyway_codegen_rule",
-        urls = ["https://github.com/richardstephens/bazel-jooq-flyway-codegen/releases/download/v0.1/bazel_jooq_flyway_codegen_rule-v0.1.tgz"],
-        sha256 = "71a9ccbcbd2dd96f32543c45eec34536c6cc441dcf525902eed89a63791def2d",
+        name = "rules_jooq_flyway_codegen",
+        urls = ["https://github.com/richardstephens/rules_jooq_flyway_codegen/releases/download/v0.2/rules_jooq_flyway_codegen-v0.2.tgz"],
+        sha256 = "a94f95319366a1f1611ada55b72cfabcad328cc628f6d091ae3d0a5f3bde8108",
     )
 
 You must also define a maven install for the codegen's dependencies:
 (Note that these dependencies are only for the code generator, they are not
 propagated to anything that imports the generated classes)
 
-    load("@rules_jvm_external//:defs.bzl", bazel_jooq_flyway_codegen_rule_maven_install = "maven_install")
-    bazel_jooq_flyway_codegen_rule_maven_install(
-        name = "bazel_jooq_flyway_codegen_rule_maven",
+    load("@rules_jvm_external//:defs.bzl", rules_jooq_flyway_codegen_maven_install = "maven_install")
+    rules_jooq_flyway_codegen_maven_install(
+        name = "rules_jooq_flyway_codegen_maven",
         artifacts = [
             "org.flywaydb:flyway-core:6.4.4",
             "org.jooq:jooq:3.13.2",

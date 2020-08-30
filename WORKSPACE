@@ -1,4 +1,4 @@
-workspace(name = "bazel_jooq_flyway_codegen_rule")
+workspace(name = "rules_jooq_flyway_codegen")
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
@@ -13,10 +13,10 @@ http_archive(
     url = "https://github.com/bazelbuild/rules_jvm_external/archive/%s.zip" % RULES_JVM_EXTERNAL_TAG,
 )
 
-load("@rules_jvm_external//:defs.bzl", bazel_jooq_flyway_codegen_rule_maven_install = "maven_install")
+load("@rules_jvm_external//:defs.bzl", rules_jooq_flyway_codegen_maven_install = "maven_install")
 
-bazel_jooq_flyway_codegen_rule_maven_install(
-    name = "bazel_jooq_flyway_codegen_rule_maven",
+rules_jooq_flyway_codegen_maven_install(
+    name = "rules_jooq_flyway_codegen_maven",
     artifacts = [
         "org.flywaydb:flyway-core:6.4.4",
         "org.jooq:jooq:3.13.2",
@@ -36,10 +36,10 @@ bazel_jooq_flyway_codegen_rule_maven_install(
     ],
 )
 
-load("@rules_jvm_external//:defs.bzl", bazel_jooq_flyway_codegen_rule_example_maven_install = "maven_install")
+load("@rules_jvm_external//:defs.bzl", rules_jooq_flyway_codegen_example_maven_install = "maven_install")
 
-bazel_jooq_flyway_codegen_rule_example_maven_install(
-    name = "bazel_jooq_flyway_codegen_rule_example_maven",
+rules_jooq_flyway_codegen_example_maven_install(
+    name = "rules_jooq_flyway_codegen_example_maven",
     artifacts = [
         "org.flywaydb:flyway-core:6.4.4",
         "org.jooq:jooq:3.13.2",

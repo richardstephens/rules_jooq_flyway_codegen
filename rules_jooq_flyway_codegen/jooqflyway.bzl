@@ -48,7 +48,7 @@ def jooqflyway(
             migration_jar,
         ],
         runtime_deps = [
-            "@bazel_jooq_flyway_codegen_rule//bazel_jooq_flyway_codegen_rule:codegen",
+            "@rules_jooq_flyway_codegen//rules_jooq_flyway_codegen:codegen",
         ],
     )
     gensrcs(

@@ -1,4 +1,4 @@
-load("//bazel_jooq_flyway_codegen_rule:jooqflyway.bzl", "jooqflyway")
+load("//rules_jooq_flyway_codegen:jooqflyway.bzl", "jooqflyway")
 
 java_library(
     name = "migration-jar",
@@ -11,8 +11,8 @@ jooqflyway(
     name = "northwind-db-classes",
     codegen_xml = "codegen.xml",
     db_type = "mysql",
-    jooq_dep = "@bazel_jooq_flyway_codegen_rule_maven//:org_jooq_jooq",
-    jooq_meta_dep = "@bazel_jooq_flyway_codegen_rule_maven//:org_jooq_jooq_meta",
+    jooq_dep = "@rules_jooq_flyway_codegen_maven//:org_jooq_jooq",
+    jooq_meta_dep = "@rules_jooq_flyway_codegen_maven//:org_jooq_jooq_meta",
     migration_jar = ":migration-jar",
     visibility = ["//examples/northwind:__subpackages__"],
 )
