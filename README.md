@@ -6,7 +6,7 @@ launched in a Testcontainer, use those to run jOOQ's code
 generator, and produce a source JAR containing your generated
 classes.
 
-Please note that this rule is still in an alpha-quality staate,
+Please note that this rule is still in an alpha-quality state,
 and the steps taken to import it may change in the future.
 
 To import the rules:
@@ -80,6 +80,7 @@ and the [jOOQ documentation for the codegen.xml file is here](https://www.jooq.o
 Now that you have a resource jar containing your migrations, you can call the
 code generator like so:
 
+    load("@rules_jooq_flyway_codegen//rules_jooq_flyway_codegen:jooqflyway.bzl", "jooqflyway")
     jooqflyway(
         name = "myservice-db-classes",
         codegen_xml = "codegen.xml",
@@ -91,6 +92,6 @@ code generator like so:
     )
 
 Valid options for db type are `postgres`, `mariadb`, or `mysql` at present, but more
-will be supported in the futuree.
+will be supported in the future.
 
 And that's it! You can now depend on `//src/myservice/db:myservice-db-classes`
