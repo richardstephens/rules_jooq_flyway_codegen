@@ -17,7 +17,7 @@ def _impl(ctx):
 
     return [DefaultInfo(files = depset([file]))]
 
-gensrcs = rule(
+jooqflyway_gensrcs = rule(
     implementation = _impl,
     attrs = {
         "migration_jar": attr.label(),
@@ -52,7 +52,7 @@ def jooqflyway(
             "@rules_jooq_flyway_codegen//rules_jooq_flyway_codegen:codegen",
         ],
     )
-    gensrcs(
+    jooqflyway_gensrcs(
         name = name + "_srcjar",
         migration_jar = migration_jar,
         tool = name + "_codegen",
