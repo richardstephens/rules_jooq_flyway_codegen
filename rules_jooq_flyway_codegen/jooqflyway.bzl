@@ -12,6 +12,7 @@ def _impl(ctx):
         #outputs = [ctx.outputs],
         executable = ctx.executable.tool,
         arguments = [args],
+        use_default_shell_env = True,
     )
 
     return [DefaultInfo(files = depset([file]))]
