@@ -1,0 +1,15 @@
+dist: focal
+
+addons:
+  apt:
+    packages:
+      - wget
+      - pkg-config
+
+before_install:
+  - wget https://github.com/bazelbuild/bazel/releases/download/3.5.0/bazel_3.5.0-linux-x86_64.deb
+  - sudo dpkg -i bazel_3.5.0-linux-x86_64.deb
+
+script:
+  - bazel build //rules_jooq_flyway_codegen:codegen
+  - bazel build //examples/northwind
