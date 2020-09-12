@@ -14,8 +14,8 @@ To import the rules:
     load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
     http_archive(
         name = "rules_jooq_flyway_codegen",
-        urls = ["https://github.com/richardstephens/rules_jooq_flyway_codegen/releases/download/v0.2/rules_jooq_flyway_codegen-v0.2.tgz"],
-        sha256 = "a94f95319366a1f1611ada55b72cfabcad328cc628f6d091ae3d0a5f3bde8108",
+        urls = ["https://github.com/richardstephens/rules_jooq_flyway_codegen/releases/download/v0.3/rules_jooq_flyway_codegen-v0.3.tgz"],
+        sha256 = "7f3b6b48e39070d8bf89a411b95d461915614d2862f301a7adb7ccccaa3b916a",
     )
 
 You must also define a maven install for the codegen's dependencies:
