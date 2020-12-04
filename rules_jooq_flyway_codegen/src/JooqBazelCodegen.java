@@ -29,7 +29,7 @@ public class JooqBazelCodegen {
         String codeGenConfigXmlPath = argv[2];
 
         Path path = Files.createTempDirectory("jooq-codegen");
-        try (JdbcDatabaseContainer<?> jdbcContainer = newJdbcContainerOfType(dbContainerType)) {
+        try (JdbcProvider jdbcContainer = newJdbcContainerOfType(dbContainerType)) {
             prepareDatabase(jdbcContainer);
 
             Jdbc jdbc = buildJdbcConfig(jdbcContainer);
@@ -50,13 +50,15 @@ public class JooqBazelCodegen {
         }
     }
 
-    private static JdbcDatabaseContainer<?> newJdbcContainerOfType(String dbContainerType) {
+    private static JdbcProvider newJdbcContainerOfType(String dbContainerType) {
         if ("postgres".equals(dbContainerType)) {
-            return new PostgreSQLContainer<>();
+            return new TestContainersJdbcProvider(new PostgreSQLContainer<>());
         } else if ("mariadb".equals(dbContainerType)) {
-            return new MariaDBContainer<>();
+            return new TestContainersJdbcProvider(new MariaDBContainer<>());
         } else if ("mysql".equals(dbContainerType)) {
-            return new MySQLContainer<>();
+            return new TestContainersJdbcProvider(new MySQLContainer<>());
+        } else if ("sqlite".equals(dbContainerType)) {
+            return new SqliteJdbcProvider();
         } else {
             throw new IllegalArgumentException("Unrecognised JDBC container type");
         }
@@ -71,7 +73,7 @@ public class JooqBazelCodegen {
         return configuration;
     }
 
-    private static void prepareDatabase(JdbcDatabaseContainer<?> jdbcContainer) {
+    private static void prepareDatabase(JdbcProvider jdbcContainer) {
         jdbcContainer.start();
         Flyway flyway =
                 Flyway.configure()
@@ -84,7 +86,7 @@ public class JooqBazelCodegen {
         System.out.println("migrated " + count + " schemas");
     }
 
-    private static Jdbc buildJdbcConfig(JdbcDatabaseContainer<?> jdbcContainer) {
+    private static Jdbc buildJdbcConfig(JdbcProvider jdbcContainer) {
         Jdbc jdbc = new Jdbc();
         jdbc.setDriver(jdbcContainer.getDriverClassName());
         jdbc.setUrl(jdbcContainer.getJdbcUrl());

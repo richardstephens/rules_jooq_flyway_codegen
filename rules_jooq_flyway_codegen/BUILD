@@ -23,5 +23,6 @@ java_library(
         "@rules_jooq_flyway_codegen_maven//:org_testcontainers_mariadb",
         "@rules_jooq_flyway_codegen_maven//:org_testcontainers_mysql",
         "@rules_jooq_flyway_codegen_maven//:org_testcontainers_postgresql",
+        "@rules_jooq_flyway_codegen_maven//:org_xerial_sqlite_jdbc",
     ],
 )

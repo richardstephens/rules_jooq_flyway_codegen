@@ -29,6 +29,7 @@ rules_jooq_flyway_codegen_maven_install(
         "org.postgresql:postgresql:42.2.14",
         "org.mariadb.jdbc:mariadb-java-client:2.6.2",
         "mysql:mysql-connector-java:8.0.21",
+        "org.xerial:sqlite-jdbc:3.32.3.2",
     ],
     fetch_sources = True,
     repositories = [
@@ -52,6 +53,7 @@ rules_jooq_flyway_codegen_example_maven_install(
         "com.google.code.gson:gson:2.8.6",
         "com.sparkjava:spark-core:2.9.1",
         "org.slf4j:slf4j-simple:1.7.30",
+        "org.xerial:sqlite-jdbc:3.32.3.2",
     ],
     fetch_sources = True,
     repositories = [
