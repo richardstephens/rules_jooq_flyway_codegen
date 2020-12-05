@@ -14,8 +14,8 @@ To import the rules:
     load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
     http_archive(
         name = "rules_jooq_flyway_codegen",
-        urls = ["https://github.com/richardstephens/rules_jooq_flyway_codegen/releases/download/v0.3/rules_jooq_flyway_codegen-v0.3.tgz"],
-        sha256 = "7f3b6b48e39070d8bf89a411b95d461915614d2862f301a7adb7ccccaa3b916a",
+        urls = ["https://github.com/richardstephens/rules_jooq_flyway_codegen/releases/downloadv0.4/rules_jooq_flyway_codegen-v0.4.tgz"],
+        sha256 = "658ded9ac534d81833984576ec21b93dcf608fc89e72ee4734625f90e20be217",
     )
 
 You must also define a maven install for the codegen's dependencies:
@@ -37,6 +37,7 @@ propagated to anything that imports the generated classes)
             "org.postgresql:postgresql:42.2.14",
             "org.mariadb.jdbc:mariadb-java-client:2.6.2",
             "mysql:mysql-connector-java:8.0.21",
+            "org.xerial:sqlite-jdbc:3.32.3.2",
         ],
         fetch_sources = True,
         repositories = [
