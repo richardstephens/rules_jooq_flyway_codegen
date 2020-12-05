@@ -14,7 +14,7 @@ To import the rules:
     load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
     http_archive(
         name = "rules_jooq_flyway_codegen",
-        urls = ["https://github.com/richardstephens/rules_jooq_flyway_codegen/releases/downloadv0.4/rules_jooq_flyway_codegen-v0.4.tgz"],
+        urls = ["https://github.com/richardstephens/rules_jooq_flyway_codegen/releases/download/v0.4/rules_jooq_flyway_codegen-v0.4.tgz"],
         sha256 = "658ded9ac534d81833984576ec21b93dcf608fc89e72ee4734625f90e20be217",
     )
 

@@ -21,12 +21,11 @@ with open("README.md", "r") as f:
 
 with open("README-new.md", "w") as f:
     for l in lines:
-        print(l)
         if "    sha256" in l:
             f.write("        sha256 = \"" + checksum + "\",\n")
         elif "urls = [\"https://github.com/richardstephens/rules_jooq_flyway_codegen" in l:
             f.write("        urls = [\"https://github.com/richardstephens/rules_jooq_flyway_codegen/releases/download"
-            +"v"+version+"/"+release_file+"\"],\n")
+            +"/v"+version+"/"+release_file+"\"],\n")
         else:
             f.write(l)
 
