@@ -48,7 +48,6 @@ public class ZipUtil {
                 if (child.isFile()) {
                     result.add(child.getAbsolutePath());
                 } else if (child.isDirectory()) {
-                    System.out.println(child.getAbsolutePath());
                     stack.push(child);
                 }
             }

@@ -1,6 +1,5 @@
 def _impl(ctx):
     file = ctx.actions.declare_file(ctx.attr.name + ".srcjar")
-    print("To:  " + file.path)
     args = ctx.actions.args()
     args.add(file.path)
     args.add(ctx.attr.db_type)

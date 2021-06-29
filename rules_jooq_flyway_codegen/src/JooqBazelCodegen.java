@@ -20,7 +20,7 @@ import java.nio.file.attribute.BasicFileAttributes;
 public class JooqBazelCodegen {
     public static void main(String[] argv) throws Exception {
         if (argv.length != 3) {
-            System.out.println("ERR: Codegen params missing");
+            System.err.println("ERR: Codegen params missing");
             System.exit(1);
         }
 
@@ -36,14 +36,12 @@ public class JooqBazelCodegen {
 
             Configuration configuration =
                     buildGenerationToolConfigurationWithOverrides(codeGenConfigXmlPath, jdbc, path);
-            System.out.println("config: " + configuration.toString());
-            System.out.println("running generation tool");
             new GenerationTool().run(configuration);
 
             ZipUtil zipUtil = new ZipUtil();
             zipUtil.zipDirectory(path.toFile(), outputSourceJar);
         } catch (Exception ex) {
-            ex.printStackTrace();
+            ex.printStackTrace(System.err);
             System.exit(1);
         } finally {
             recursiveDeleteOnExit(path);
@@ -82,8 +80,7 @@ public class JooqBazelCodegen {
                                 jdbcContainer.getUsername(),
                                 jdbcContainer.getPassword())
                         .load();
-        int count = flyway.migrate();
-        System.out.println("migrated " + count + " schemas");
+        flyway.migrate();
     }
 
     private static Jdbc buildJdbcConfig(JdbcProvider jdbcContainer) {
