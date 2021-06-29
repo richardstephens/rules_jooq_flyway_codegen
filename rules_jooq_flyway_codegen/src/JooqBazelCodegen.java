@@ -19,17 +19,18 @@ import java.nio.file.attribute.BasicFileAttributes;
 
 public class JooqBazelCodegen {
     public static void main(String[] argv) throws Exception {
-        if (argv.length != 3) {
+        if (argv.length != 4) {
             System.err.println("ERR: Codegen params missing");
             System.exit(1);
         }
 
         String outputSourceJar = argv[0];
         String dbContainerType = argv[1];
-        String codeGenConfigXmlPath = argv[2];
+        String dockerImage = argv[2];
+        String codeGenConfigXmlPath = argv[3];
 
         Path path = Files.createTempDirectory("jooq-codegen");
-        try (JdbcProvider jdbcContainer = newJdbcContainerOfType(dbContainerType)) {
+        try (JdbcProvider jdbcContainer = newJdbcContainerOfType(dbContainerType, dockerImage)) {
             prepareDatabase(jdbcContainer);
 
             Jdbc jdbc = buildJdbcConfig(jdbcContainer);
@@ -48,13 +49,13 @@ public class JooqBazelCodegen {
         }
     }
 
-    private static JdbcProvider newJdbcContainerOfType(String dbContainerType) {
+    private static JdbcProvider newJdbcContainerOfType(String dbContainerType, String dockerImage) {
         if ("postgres".equals(dbContainerType)) {
-            return new TestContainersJdbcProvider(new PostgreSQLContainer<>());
+            return  TestContainersJdbcProvider.forClass(PostgreSQLContainer.class, dockerImage, PostgreSQLContainer.IMAGE);
         } else if ("mariadb".equals(dbContainerType)) {
-            return new TestContainersJdbcProvider(new MariaDBContainer<>());
+            return  TestContainersJdbcProvider.forClass(MariaDBContainer.class, dockerImage, "mariadb");
         } else if ("mysql".equals(dbContainerType)) {
-            return new TestContainersJdbcProvider(new MySQLContainer<>());
+            return TestContainersJdbcProvider.forClass(MySQLContainer.class, dockerImage, MySQLContainer.IMAGE);
         } else if ("sqlite".equals(dbContainerType)) {
             return new SqliteJdbcProvider();
         } else {

@@ -3,6 +3,7 @@ def _impl(ctx):
     args = ctx.actions.args()
     args.add(file.path)
     args.add(ctx.attr.db_type)
+    args.add(ctx.attr.docker_image)
     args.add_all(ctx.attr.codegen_xml.files)
 
     ctx.actions.run(
@@ -26,6 +27,7 @@ jooqflyway_gensrcs = rule(
             cfg = "host",
         ),
         "db_type": attr.string(),
+        "docker_image": attr.string(),
     },
     fragments = ["jvm"],
     host_fragments = ["jvm"],
@@ -39,6 +41,7 @@ def jooqflyway(
         db_type,
         jooq_dep = "@maven//:org_jooq_jooq",
         jooq_meta_dep = "@maven//:org_jooq_jooq_meta",
+        docker_image = "--",
         **kwargs):
     native.java_binary(
         name = name + "_codegen",
@@ -57,6 +60,7 @@ def jooqflyway(
         tool = name + "_codegen",
         codegen_xml = codegen_xml,
         db_type = db_type,
+        docker_image = docker_image,
     )
 
     native.java_library(
