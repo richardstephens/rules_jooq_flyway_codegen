@@ -1,4 +1,4 @@
-package dev.richst.jooq_bazel;
+package rules_jooq_flyway_codegen.src.dev.richst.jooq_bazel;
 
 import java.io.File;
 import java.io.IOException;

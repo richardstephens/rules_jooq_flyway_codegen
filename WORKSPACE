@@ -14,7 +14,7 @@ http_archive(
 )
 
 load("@rules_jvm_external//:defs.bzl", rules_jooq_flyway_codegen_maven_install = "maven_install")
-
+TESTCONTAINERS_VERSION = "1.16.3"
 rules_jooq_flyway_codegen_maven_install(
     name = "rules_jooq_flyway_codegen_maven",
     artifacts = [
@@ -22,10 +22,10 @@ rules_jooq_flyway_codegen_maven_install(
         "org.jooq:jooq:3.13.2",
         "org.jooq:jooq-meta:3.13.2",
         "org.jooq:jooq-codegen:3.13.2",
-        "org.testcontainers:testcontainers:1.15.1",
-        "org.testcontainers:postgresql:1.15.1",
-        "org.testcontainers:mariadb:1.15.1",
-        "org.testcontainers:mysql:1.15.1",
+        "org.testcontainers:testcontainers:%s" % TESTCONTAINERS_VERSION,
+        "org.testcontainers:postgresql:%s" % TESTCONTAINERS_VERSION,
+        "org.testcontainers:mariadb:%s" % TESTCONTAINERS_VERSION,
+        "org.testcontainers:mysql:%s" % TESTCONTAINERS_VERSION,
         "org.postgresql:postgresql:42.2.14",
         "org.mariadb.jdbc:mariadb-java-client:2.6.2",
         "mysql:mysql-connector-java:8.0.21",

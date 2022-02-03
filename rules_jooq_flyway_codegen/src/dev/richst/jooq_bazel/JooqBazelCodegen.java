@@ -1,10 +1,9 @@
-package dev.richst.jooq_bazel;
+package rules_jooq_flyway_codegen.src.dev.richst.jooq_bazel;
 
 import org.flywaydb.core.Flyway;
 import org.jooq.codegen.GenerationTool;
 import org.jooq.meta.jaxb.Configuration;
 import org.jooq.meta.jaxb.Jdbc;
-import org.testcontainers.containers.JdbcDatabaseContainer;
 import org.testcontainers.containers.MariaDBContainer;
 import org.testcontainers.containers.MySQLContainer;
 import org.testcontainers.containers.PostgreSQLContainer;

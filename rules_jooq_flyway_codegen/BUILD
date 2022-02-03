@@ -2,10 +2,19 @@ exports_files([
     "jooqflyway.bzl",
 ])
 
+genrule(
+    name = "codegen_srcjar",
+    srcs = glob(["src/**/*.java"]),
+    tools = ["@bazel_tools//tools/zip:zipper"],
+    outs = ["jooqflyway_srcjar.srcjar"],
+    cmd = "$(location @bazel_tools//tools/zip:zipper) c $@ $(SRCS)",
+    visibility = ["//visibility:public"],
+)
+
 java_library(
     name = "codegen",
     #    main_class = "dev.richst.jooq_bazel.JooqBazelCodegen",
-    srcs = glob(["src/*.java"]),
+    srcs = glob(["src/**/*.java"]),
     resource_jars = [
     ],
     visibility = ["//visibility:public"],

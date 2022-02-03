@@ -42,17 +42,42 @@ def jooqflyway(
         jooq_dep = "@maven//:org_jooq_jooq",
         jooq_meta_dep = "@maven//:org_jooq_jooq_meta",
         docker_image = "--",
+        maven_install_target = None,
         **kwargs):
+    if maven_install_target == None:
+        srcs = None
+        deps = None
+        runtime_deps = [
+            "@rules_jooq_flyway_codegen//rules_jooq_flyway_codegen:codegen",
+        ]
+    else:
+        srcs = ["@rules_jooq_flyway_codegen//rules_jooq_flyway_codegen:codegen_srcjar"]
+        deps = [
+                    "@" + maven_install_target + "//:mysql_mysql_connector_java",
+                    "@" + maven_install_target + "//:org_flywaydb_flyway_core",
+                    "@" + maven_install_target + "//:org_jooq_jooq",
+                    "@" + maven_install_target + "//:org_jooq_jooq_codegen",
+                    "@" + maven_install_target + "//:org_jooq_jooq_meta",
+                    "@" + maven_install_target + "//:org_mariadb_jdbc_mariadb_java_client",
+                    "@" + maven_install_target + "//:org_postgresql_postgresql",
+                    "@" + maven_install_target + "//:org_testcontainers_jdbc",
+                    "@" + maven_install_target + "//:org_testcontainers_mariadb",
+                    "@" + maven_install_target + "//:org_testcontainers_mysql",
+                    "@" + maven_install_target + "//:org_testcontainers_postgresql",
+                    "@" + maven_install_target + "//:org_testcontainers_testcontainers",
+                    "@" + maven_install_target + "//:org_xerial_sqlite_jdbc",
+        ]
+        runtime_deps = None
     native.java_binary(
         name = name + "_codegen",
-        main_class = "dev.richst.jooq_bazel.JooqBazelCodegen",
+        main_class = "rules_jooq_flyway_codegen.src.dev.richst.jooq_bazel.JooqBazelCodegen",
+        srcs = srcs,
+        deps = deps,
         visibility = ["//visibility:public"],
         resource_jars = [
             migration_jar,
         ],
-        runtime_deps = [
-            "@rules_jooq_flyway_codegen//rules_jooq_flyway_codegen:codegen",
-        ],
+        runtime_deps = runtime_deps,
     )
     jooqflyway_gensrcs(
         name = name + "_srcjar",
