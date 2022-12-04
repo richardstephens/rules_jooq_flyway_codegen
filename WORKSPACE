@@ -14,7 +14,9 @@ http_archive(
 )
 
 load("@rules_jvm_external//:defs.bzl", rules_jooq_flyway_codegen_maven_install = "maven_install")
+
 TESTCONTAINERS_VERSION = "1.16.3"
+
 rules_jooq_flyway_codegen_maven_install(
     name = "rules_jooq_flyway_codegen_maven",
     artifacts = [

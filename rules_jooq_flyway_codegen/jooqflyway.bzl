@@ -54,19 +54,19 @@ def jooqflyway(
     else:
         srcs = ["@rules_jooq_flyway_codegen//rules_jooq_flyway_codegen:codegen_srcjar"]
         deps = [
-                    "@" + maven_install_target + "//:mysql_mysql_connector_java",
-                    "@" + maven_install_target + "//:org_flywaydb_flyway_core",
-                    "@" + maven_install_target + "//:org_jooq_jooq",
-                    "@" + maven_install_target + "//:org_jooq_jooq_codegen",
-                    "@" + maven_install_target + "//:org_jooq_jooq_meta",
-                    "@" + maven_install_target + "//:org_mariadb_jdbc_mariadb_java_client",
-                    "@" + maven_install_target + "//:org_postgresql_postgresql",
-                    "@" + maven_install_target + "//:org_testcontainers_jdbc",
-                    "@" + maven_install_target + "//:org_testcontainers_mariadb",
-                    "@" + maven_install_target + "//:org_testcontainers_mysql",
-                    "@" + maven_install_target + "//:org_testcontainers_postgresql",
-                    "@" + maven_install_target + "//:org_testcontainers_testcontainers",
-                    "@" + maven_install_target + "//:org_xerial_sqlite_jdbc",
+            "@" + maven_install_target + "//:mysql_mysql_connector_java",
+            "@" + maven_install_target + "//:org_flywaydb_flyway_core",
+            "@" + maven_install_target + "//:org_jooq_jooq",
+            "@" + maven_install_target + "//:org_jooq_jooq_codegen",
+            "@" + maven_install_target + "//:org_jooq_jooq_meta",
+            "@" + maven_install_target + "//:org_mariadb_jdbc_mariadb_java_client",
+            "@" + maven_install_target + "//:org_postgresql_postgresql",
+            "@" + maven_install_target + "//:org_testcontainers_jdbc",
+            "@" + maven_install_target + "//:org_testcontainers_mariadb",
+            "@" + maven_install_target + "//:org_testcontainers_mysql",
+            "@" + maven_install_target + "//:org_testcontainers_postgresql",
+            "@" + maven_install_target + "//:org_testcontainers_testcontainers",
+            "@" + maven_install_target + "//:org_xerial_sqlite_jdbc",
         ]
         runtime_deps = [migration_jar]
     native.java_binary(

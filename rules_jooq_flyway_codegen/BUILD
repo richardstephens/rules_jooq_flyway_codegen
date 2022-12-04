@@ -5,9 +5,9 @@ exports_files([
 genrule(
     name = "codegen_srcjar",
     srcs = glob(["src/**/*.java"]),
-    tools = ["@bazel_tools//tools/zip:zipper"],
     outs = ["jooqflyway_srcjar.srcjar"],
     cmd = "$(location @bazel_tools//tools/zip:zipper) c $@ $(SRCS)",
+    tools = ["@bazel_tools//tools/zip:zipper"],
     visibility = ["//visibility:public"],
 )
 
