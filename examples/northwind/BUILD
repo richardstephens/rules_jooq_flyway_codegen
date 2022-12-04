@@ -2,12 +2,10 @@ java_binary(
     name = "northwind",
     srcs = glob(["src/main/java/**/*.java"]),
     main_class = "dev.richst.jooq_bazel_example.northwind.service.App",
-    resource_jars = [
-        "//examples/northwind/db:migration-jar",
-    ],
     resources = [
     ],
     runtime_deps = [
+        "//examples/northwind/db:migration-jar",
         "@rules_jooq_flyway_codegen_example_maven//:org_slf4j_slf4j_simple",
     ],
     deps = [

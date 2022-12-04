@@ -49,6 +49,7 @@ def jooqflyway(
         deps = None
         runtime_deps = [
             "@rules_jooq_flyway_codegen//rules_jooq_flyway_codegen:codegen",
+            migration_jar,
         ]
     else:
         srcs = ["@rules_jooq_flyway_codegen//rules_jooq_flyway_codegen:codegen_srcjar"]
@@ -67,16 +68,13 @@ def jooqflyway(
                     "@" + maven_install_target + "//:org_testcontainers_testcontainers",
                     "@" + maven_install_target + "//:org_xerial_sqlite_jdbc",
         ]
-        runtime_deps = None
+        runtime_deps = [migration_jar]
     native.java_binary(
         name = name + "_codegen",
         main_class = "rules_jooq_flyway_codegen.src.dev.richst.jooq_bazel.JooqBazelCodegen",
         srcs = srcs,
         deps = deps,
         visibility = ["//visibility:public"],
-        resource_jars = [
-            migration_jar,
-        ],
         runtime_deps = runtime_deps,
     )
     jooqflyway_gensrcs(

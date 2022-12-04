@@ -15,8 +15,6 @@ java_library(
     name = "codegen",
     #    main_class = "dev.richst.jooq_bazel.JooqBazelCodegen",
     srcs = glob(["src/**/*.java"]),
-    resource_jars = [
-    ],
     visibility = ["//visibility:public"],
     runtime_deps = [
     ],
