@@ -21,6 +21,8 @@ java_library(
     deps = [
         "@rules_jooq_flyway_codegen_maven//:mysql_mysql_connector_java",
         "@rules_jooq_flyway_codegen_maven//:org_flywaydb_flyway_core",
+        "@rules_jooq_flyway_codegen_maven//:org_flywaydb_flyway_database_postgresql",
+        "@rules_jooq_flyway_codegen_maven//:org_flywaydb_flyway_mysql",
         "@rules_jooq_flyway_codegen_maven//:org_jooq_jooq",
         "@rules_jooq_flyway_codegen_maven//:org_jooq_jooq_codegen",
         "@rules_jooq_flyway_codegen_maven//:org_jooq_jooq_meta",

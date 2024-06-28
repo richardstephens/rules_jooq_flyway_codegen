@@ -15,19 +15,25 @@ http_archive(
 
 load("@rules_jvm_external//:defs.bzl", rules_jooq_flyway_codegen_maven_install = "maven_install")
 
-TESTCONTAINERS_VERSION = "1.16.3"
+TESTCONTAINERS_VER = "1.19.8"
+
+JOOQ_VER = "3.19.10"
+
+FLYWAY_VER = "10.15.0"
 
 rules_jooq_flyway_codegen_maven_install(
     name = "rules_jooq_flyway_codegen_maven",
     artifacts = [
-        "org.flywaydb:flyway-core:6.4.4",
-        "org.jooq:jooq:3.13.2",
-        "org.jooq:jooq-meta:3.13.2",
-        "org.jooq:jooq-codegen:3.13.2",
-        "org.testcontainers:testcontainers:%s" % TESTCONTAINERS_VERSION,
-        "org.testcontainers:postgresql:%s" % TESTCONTAINERS_VERSION,
-        "org.testcontainers:mariadb:%s" % TESTCONTAINERS_VERSION,
-        "org.testcontainers:mysql:%s" % TESTCONTAINERS_VERSION,
+        "org.flywaydb:flyway-core:%s" % FLYWAY_VER,
+        "org.flywaydb:flyway-database-postgresql:%s" % FLYWAY_VER,
+        "org.flywaydb:flyway-mysql:%s" % FLYWAY_VER,
+        "org.jooq:jooq:%s" % JOOQ_VER,
+        "org.jooq:jooq-meta:%s" % JOOQ_VER,
+        "org.jooq:jooq-codegen:%s" % JOOQ_VER,
+        "org.testcontainers:testcontainers:%s" % TESTCONTAINERS_VER,
+        "org.testcontainers:postgresql:%s" % TESTCONTAINERS_VER,
+        "org.testcontainers:mariadb:%s" % TESTCONTAINERS_VER,
+        "org.testcontainers:mysql:%s" % TESTCONTAINERS_VER,
         "org.postgresql:postgresql:42.2.14",
         "org.mariadb.jdbc:mariadb-java-client:2.6.2",
         "mysql:mysql-connector-java:8.0.21",
@@ -44,12 +50,14 @@ load("@rules_jvm_external//:defs.bzl", rules_jooq_flyway_codegen_example_maven_i
 rules_jooq_flyway_codegen_example_maven_install(
     name = "rules_jooq_flyway_codegen_example_maven",
     artifacts = [
-        "org.flywaydb:flyway-core:6.4.4",
-        "org.jooq:jooq:3.13.2",
-        "org.jooq:jooq-meta:3.13.2",
-        "org.jooq:jooq-codegen:3.13.2",
-        "org.testcontainers:testcontainers:1.15.1",
-        "org.testcontainers:mysql:1.15.1",
+        "org.flywaydb:flyway-core:%s" % FLYWAY_VER,
+        "org.flywaydb:flyway-database-postgresql:%s" % FLYWAY_VER,
+        "org.flywaydb:flyway-mysql:%s" % FLYWAY_VER,
+        "org.jooq:jooq:%s" % JOOQ_VER,
+        "org.jooq:jooq-meta:%s" % JOOQ_VER,
+        "org.jooq:jooq-codegen:%s" % JOOQ_VER,
+        "org.testcontainers:testcontainers:%s" % TESTCONTAINERS_VER,
+        "org.testcontainers:mysql:%s" % TESTCONTAINERS_VER,
         "mysql:mysql-connector-java:8.0.21",
         "com.zaxxer:HikariCP:3.4.5",
         "mysql:mysql-connector-java:8.0.21",

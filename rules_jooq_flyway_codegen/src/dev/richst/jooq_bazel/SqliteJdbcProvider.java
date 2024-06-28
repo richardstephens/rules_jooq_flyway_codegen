@@ -10,7 +10,7 @@ public class SqliteJdbcProvider implements JdbcProvider {
         try {
             this.sqliteTempFile = File.createTempFile("bazel_jooq_flyway_codegen", ".sqlite");
         } catch (IOException e) {
-            throw new IllegalStateException("IO Exception cerating temp file",e);
+            throw new IllegalStateException("IO Exception creating temp file",e);
         }
     }
 

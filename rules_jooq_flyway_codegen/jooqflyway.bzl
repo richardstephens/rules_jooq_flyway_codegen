@@ -56,6 +56,8 @@ def jooqflyway(
         deps = [
             "@" + maven_install_target + "//:mysql_mysql_connector_java",
             "@" + maven_install_target + "//:org_flywaydb_flyway_core",
+            "@" + maven_install_target + "//:org_flywaydb_flyway_mysql",
+            "@" + maven_install_target + "//:org_flywaydb_flyway_database_postgresql",
             "@" + maven_install_target + "//:org_jooq_jooq",
             "@" + maven_install_target + "//:org_jooq_jooq_codegen",
             "@" + maven_install_target + "//:org_jooq_jooq_meta",
