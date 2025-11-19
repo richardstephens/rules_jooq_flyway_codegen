@@ -15,7 +15,7 @@ http_archive(
 
 load("@rules_jvm_external//:defs.bzl", rules_jooq_flyway_codegen_maven_install = "maven_install")
 
-TESTCONTAINERS_VER = "1.19.8"
+TESTCONTAINERS_VER = "2.0.2"
 
 JOOQ_VER = "3.19.10"
 
@@ -31,12 +31,13 @@ rules_jooq_flyway_codegen_maven_install(
         "org.jooq:jooq-meta:%s" % JOOQ_VER,
         "org.jooq:jooq-codegen:%s" % JOOQ_VER,
         "org.testcontainers:testcontainers:%s" % TESTCONTAINERS_VER,
-        "org.testcontainers:postgresql:%s" % TESTCONTAINERS_VER,
-        "org.testcontainers:mariadb:%s" % TESTCONTAINERS_VER,
-        "org.testcontainers:mysql:%s" % TESTCONTAINERS_VER,
+        "org.testcontainers:testcontainers-postgresql:%s" % TESTCONTAINERS_VER,
+        "org.testcontainers:testcontainers-mariadb:%s" % TESTCONTAINERS_VER,
+        "org.testcontainers:testcontainers-mysql:%s" % TESTCONTAINERS_VER,
         "org.postgresql:postgresql:42.2.14",
         "org.mariadb.jdbc:mariadb-java-client:2.6.2",
         "mysql:mysql-connector-java:8.0.21",
+        "org.slf4j:slf4j-simple:1.7.30",
         "org.xerial:sqlite-jdbc:3.32.3.2",
     ],
     fetch_sources = True,
@@ -57,7 +58,7 @@ rules_jooq_flyway_codegen_example_maven_install(
         "org.jooq:jooq-meta:%s" % JOOQ_VER,
         "org.jooq:jooq-codegen:%s" % JOOQ_VER,
         "org.testcontainers:testcontainers:%s" % TESTCONTAINERS_VER,
-        "org.testcontainers:mysql:%s" % TESTCONTAINERS_VER,
+        "org.testcontainers:testcontainers-mysql:%s" % TESTCONTAINERS_VER,
         "mysql:mysql-connector-java:8.0.21",
         "com.zaxxer:HikariCP:3.4.5",
         "mysql:mysql-connector-java:8.0.21",
