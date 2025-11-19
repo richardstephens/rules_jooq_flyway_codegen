@@ -17,7 +17,7 @@ java_binary(
         "@rules_jooq_flyway_codegen_example_maven//:org_flywaydb_flyway_core",
         "@rules_jooq_flyway_codegen_example_maven//:org_jooq_jooq",
         "@rules_jooq_flyway_codegen_example_maven//:org_jooq_jooq_meta",
-        "@rules_jooq_flyway_codegen_example_maven//:org_testcontainers_mysql",
+        "@rules_jooq_flyway_codegen_example_maven//:org_testcontainers_testcontainers_mysql",
         "@rules_jooq_flyway_codegen_example_maven//:org_testcontainers_testcontainers",
     ],
 )
