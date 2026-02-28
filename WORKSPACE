@@ -15,7 +15,7 @@ http_archive(
 
 load("@rules_jvm_external//:defs.bzl", rules_jooq_flyway_codegen_maven_install = "maven_install")
 
-TESTCONTAINERS_VER = "1.19.8"
+TESTCONTAINERS_VER = "1.21.4"
 
 JOOQ_VER = "3.19.10"
 
