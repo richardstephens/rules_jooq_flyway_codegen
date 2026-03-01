@@ -6,18 +6,17 @@ import java.io.IOException;
 public class SqliteJdbcProvider implements JdbcProvider {
 
     private final File sqliteTempFile;
+
     public SqliteJdbcProvider() {
         try {
             this.sqliteTempFile = File.createTempFile("bazel_jooq_flyway_codegen", ".sqlite");
         } catch (IOException e) {
-            throw new IllegalStateException("IO Exception creating temp file",e);
+            throw new IllegalStateException("IO Exception creating temp file", e);
         }
     }
 
     @Override
-    public void start() {
-
-    }
+    public void start() {}
 
     @Override
     public String getDriverClassName() {
@@ -40,6 +39,5 @@ public class SqliteJdbcProvider implements JdbcProvider {
     }
 
     @Override
-    public void close() throws IOException {
-    }
+    public void close() throws IOException {}
 }

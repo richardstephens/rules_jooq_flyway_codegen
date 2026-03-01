@@ -50,11 +50,14 @@ public class JooqBazelCodegen {
 
     private static JdbcProvider newJdbcContainerOfType(String dbContainerType, String dockerImage) {
         if ("postgres".equals(dbContainerType)) {
-            return  TestContainersJdbcProvider.forClass(PostgreSQLContainer.class, dockerImage, PostgreSQLContainer.IMAGE);
+            return TestContainersJdbcProvider.forClass(
+                    PostgreSQLContainer.class, dockerImage, PostgreSQLContainer.IMAGE);
         } else if ("mariadb".equals(dbContainerType)) {
-            return  TestContainersJdbcProvider.forClass(MariaDBContainer.class, dockerImage, "mariadb");
+            return TestContainersJdbcProvider.forClass(
+                    MariaDBContainer.class, dockerImage, "mariadb");
         } else if ("mysql".equals(dbContainerType)) {
-            return TestContainersJdbcProvider.forClass(MySQLContainer.class, dockerImage, MySQLContainer.IMAGE);
+            return TestContainersJdbcProvider.forClass(
+                    MySQLContainer.class, dockerImage, MySQLContainer.IMAGE);
         } else if ("sqlite".equals(dbContainerType)) {
             return new SqliteJdbcProvider();
         } else {

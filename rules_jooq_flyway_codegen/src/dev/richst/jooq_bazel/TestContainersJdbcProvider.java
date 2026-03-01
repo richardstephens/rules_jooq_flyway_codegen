@@ -14,25 +14,33 @@ public class TestContainersJdbcProvider implements JdbcProvider {
         this.jdbcContainer = jdbcContainer;
     }
 
-    public static TestContainersJdbcProvider forClass(Class<? extends JdbcDatabaseContainer> clazz, String imgName, String defaultImage) {
+    public static TestContainersJdbcProvider forClass(
+            Class<? extends JdbcDatabaseContainer> clazz, String imgName, String defaultImage) {
         try {
             if (imgName == null || imgName.equals("--")) {
                 for (Constructor c : clazz.getConstructors()) {
                     if (c.getParameterCount() == 0) {
-                        return new TestContainersJdbcProvider((JdbcDatabaseContainer) c.newInstance());
+                        return new TestContainersJdbcProvider(
+                                (JdbcDatabaseContainer) c.newInstance());
                     }
                 }
             } else {
                 for (Constructor c : clazz.getConstructors()) {
-                    if (c.getParameterCount() == 1 && c.getParameterTypes()[0].equals(DockerImageName.class)) {
-                        DockerImageName tcImgName = DockerImageName.parse(imgName).asCompatibleSubstituteFor(defaultImage);
-                        return new TestContainersJdbcProvider((JdbcDatabaseContainer) c.newInstance(tcImgName));
+                    if (c.getParameterCount() == 1
+                            && c.getParameterTypes()[0].equals(DockerImageName.class)) {
+                        DockerImageName tcImgName =
+                                DockerImageName.parse(imgName)
+                                        .asCompatibleSubstituteFor(defaultImage);
+                        return new TestContainersJdbcProvider(
+                                (JdbcDatabaseContainer) c.newInstance(tcImgName));
                     }
                 }
             }
-            throw new IllegalStateException("Could not find appropriate constructor on " + clazz.getCanonicalName());
+            throw new IllegalStateException(
+                    "Could not find appropriate constructor on " + clazz.getCanonicalName());
         } catch (ReflectiveOperationException ex) {
-            throw new IllegalStateException("ReflectiveOperationException trying to create testcontainers instance",ex);
+            throw new IllegalStateException(
+                    "ReflectiveOperationException trying to create testcontainers instance", ex);
         }
     }
 
