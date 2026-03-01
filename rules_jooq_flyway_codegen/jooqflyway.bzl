@@ -6,6 +6,11 @@ def _impl(ctx):
     args.add(ctx.attr.docker_image)
     args.add_all(ctx.attr.codegen_xml.files)
 
+    execution_requirements = {}
+
+    if ctx.attr.no_sandbox:
+        execution_requirements["no-sandbox"] = "1"
+
     ctx.actions.run(
         inputs = ctx.attr.migration_jar.files.to_list() + ctx.attr.codegen_xml.files.to_list(),
         outputs = [file],
@@ -13,6 +18,7 @@ def _impl(ctx):
         executable = ctx.executable.tool,
         arguments = [args],
         use_default_shell_env = True,
+        execution_requirements = execution_requirements,
     )
 
     return [DefaultInfo(files = depset([file]))]
@@ -28,6 +34,7 @@ jooqflyway_gensrcs = rule(
         ),
         "db_type": attr.string(),
         "docker_image": attr.string(),
+        "no_sandbox": attr.bool(default = False),
     },
     fragments = ["jvm"],
     host_fragments = ["jvm"],
@@ -86,6 +93,10 @@ def jooqflyway(
         codegen_xml = codegen_xml,
         db_type = db_type,
         docker_image = docker_image,
+        no_sandbox = select({
+            "@bazel_tools//src/conditions:darwin": True,
+            "//conditions:default": False,
+        }),
     )
 
     native.java_library(
