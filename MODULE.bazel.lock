@@ -92,7 +92,7 @@
   "moduleExtensions": {
     "//tools:extensions.bzl%google_java_format": {
       "general": {
-        "bzlTransitiveDigest": "Sy8vYUTIVdUUJ/C69lO3vFMQZ5v42yvzlHCgOiRz2tw=",
+        "bzlTransitiveDigest": "5Pun9bGOrFUwzVwiq4ykY8kww3Hkg34vnibNMKgjtKs=",
         "usagesDigest": "qifnd8B6IKzazXxtxld0RShY3xQ1mW9OrrFUoHs5xpM=",
         "recordedFileInputs": {},
         "recordedDirentsInputs": {},
@@ -102,9 +102,9 @@
             "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
             "ruleClassName": "http_file",
             "attributes": {
-              "sha256": "79e1cb5c8bd698c572c0ae504d07816129b8fc06204fb49550bec83bd5ea0aa8",
+              "sha256": "bfb7f9ead6cd328389bc2da53860443bc0e805dfd08cc889bfdf43b26cb2a6e8",
               "urls": [
-                "https://github.com/google/google-java-format/releases/download/v1.34.1/google-java-format-1.34.1-all-deps.jar"
+                "https://github.com/google/google-java-format/releases/download/v1.35.0/google-java-format-1.35.0-all-deps.jar"
               ]
             }
           }
