@@ -1,19 +1,11 @@
-workspace(name = "rules_jooq_flyway_codegen")
-
-load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
-
-RULES_JVM_EXTERNAL_TAG = "3.0"
-
-RULES_JVM_EXTERNAL_SHA = "62133c125bf4109dfd9d2af64830208356ce4ef8b165a6ef15bbff7460b35c3a"
-
-http_archive(
-    name = "rules_jvm_external",
-    sha256 = RULES_JVM_EXTERNAL_SHA,
-    strip_prefix = "rules_jvm_external-%s" % RULES_JVM_EXTERNAL_TAG,
-    url = "https://github.com/bazelbuild/rules_jvm_external/archive/%s.zip" % RULES_JVM_EXTERNAL_TAG,
+module(
+    name = "rules_jooq_flyway_codegen",
+    version = "0.8",
+    compatibility_level = 1,
 )
 
-load("@rules_jvm_external//:defs.bzl", rules_jooq_flyway_codegen_maven_install = "maven_install")
+bazel_dep(name = "rules_java", version = "7.12.2")
+bazel_dep(name = "rules_jvm_external", version = "6.7")
 
 TESTCONTAINERS_VER = "1.21.4"
 
@@ -21,7 +13,8 @@ JOOQ_VER = "3.19.10"
 
 FLYWAY_VER = "10.15.0"
 
-rules_jooq_flyway_codegen_maven_install(
+maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
+maven.install(
     name = "rules_jooq_flyway_codegen_maven",
     artifacts = [
         "org.flywaydb:flyway-core:%s" % FLYWAY_VER,
@@ -44,10 +37,14 @@ rules_jooq_flyway_codegen_maven_install(
         "https://repo1.maven.org/maven2",
     ],
 )
+use_repo(maven, "rules_jooq_flyway_codegen_maven")
 
-load("@rules_jvm_external//:defs.bzl", rules_jooq_flyway_codegen_example_maven_install = "maven_install")
-
-rules_jooq_flyway_codegen_example_maven_install(
+maven_dev = use_extension(
+    "@rules_jvm_external//:extensions.bzl",
+    "maven",
+    dev_dependency = True,
+)
+maven_dev.install(
     name = "rules_jooq_flyway_codegen_example_maven",
     artifacts = [
         "org.flywaydb:flyway-core:%s" % FLYWAY_VER,
@@ -60,7 +57,6 @@ rules_jooq_flyway_codegen_example_maven_install(
         "org.testcontainers:mysql:%s" % TESTCONTAINERS_VER,
         "mysql:mysql-connector-java:8.0.21",
         "com.zaxxer:HikariCP:3.4.5",
-        "mysql:mysql-connector-java:8.0.21",
         "com.google.code.gson:gson:2.8.6",
         "com.sparkjava:spark-core:2.9.1",
         "org.slf4j:slf4j-simple:1.7.30",
@@ -71,12 +67,11 @@ rules_jooq_flyway_codegen_example_maven_install(
         "https://repo1.maven.org/maven2",
     ],
 )
+use_repo(maven_dev, "rules_jooq_flyway_codegen_example_maven")
 
-load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_file")
-
-http_file(
-    name = "google_java_format",
-    sha256 = "79e1cb5c8bd698c572c0ae504d07816129b8fc06204fb49550bec83bd5ea0aa8",
-    urls = ["https://github.com/google/google-java-format/releases/download/v1.34.1/google-java-format-1.34.1-all-deps.jar"],
+google_java_format = use_extension(
+    "//tools:extensions.bzl",
+    "google_java_format",
+    dev_dependency = True,
 )
-
+use_repo(google_java_format, "google_java_format")

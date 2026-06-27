@@ -1,3 +1,9 @@
+NOTE
+====
+
+The rules are currently being updated to work with bzlmod, the documentation below is obsolete
+
+
 Bazel rules for jOOQ codegen from Flyway migrations
 ===================================================
 
