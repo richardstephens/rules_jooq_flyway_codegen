@@ -1,31 +1,39 @@
+load("@rules_java//java:defs.bzl", "java_library")
+
 exports_files([
     "jooqflyway.bzl",
 ])
 
-genrule(
-    name = "codegen_srcjar",
+java_library(
+    name = "codegen",
     srcs = glob(["src/**/*.java"]),
-    outs = ["jooqflyway_srcjar.srcjar"],
-    cmd = "$(location @bazel_tools//tools/zip:zipper) c $@ $(SRCS)",
-    tools = ["@bazel_tools//tools/zip:zipper"],
     visibility = ["//visibility:public"],
+    deps = [
+        ":flyway_compileonly",
+        ":jooq_compileonly",
+    ],
 )
 
 java_library(
-    name = "codegen",
-    #    main_class = "dev.richst.jooq_bazel.JooqBazelCodegen",
-    srcs = glob(["src/**/*.java"]),
-    visibility = ["//visibility:public"],
-    runtime_deps = [
+    name = "jooq_compileonly",
+    neverlink = True,
+    visibility = ["//visibility:private"],
+    exports = [
+        "@rules_jooq_flyway_codegen_maven//:org_jooq_jooq",
+        "@rules_jooq_flyway_codegen_maven//:org_jooq_jooq_codegen",
+        "@rules_jooq_flyway_codegen_maven//:org_jooq_jooq_meta",
     ],
-    deps = [
+)
+
+java_library(
+    name = "flyway_compileonly",
+    neverlink = True,
+    visibility = ["//visibility:private"],
+    exports = [
         "@rules_jooq_flyway_codegen_maven//:mysql_mysql_connector_java",
         "@rules_jooq_flyway_codegen_maven//:org_flywaydb_flyway_core",
         "@rules_jooq_flyway_codegen_maven//:org_flywaydb_flyway_database_postgresql",
         "@rules_jooq_flyway_codegen_maven//:org_flywaydb_flyway_mysql",
-        "@rules_jooq_flyway_codegen_maven//:org_jooq_jooq",
-        "@rules_jooq_flyway_codegen_maven//:org_jooq_jooq_codegen",
-        "@rules_jooq_flyway_codegen_maven//:org_jooq_jooq_meta",
         "@rules_jooq_flyway_codegen_maven//:org_mariadb_jdbc_mariadb_java_client",
         "@rules_jooq_flyway_codegen_maven//:org_postgresql_postgresql",
         "@rules_jooq_flyway_codegen_maven//:org_testcontainers_jdbc",
